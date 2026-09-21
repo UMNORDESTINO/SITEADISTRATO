@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4utoWolves - Gerar Token</title>
+  <meta name="description" content="Gere gratuitamente um token de licença para o 4utoWolves assistindo a um anúncio." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card">
+    <h1>4utoWolves</h1>
+    <p class="subtitle">Gere seu token de licença gratuitamente</p>
+
+    <ol class="steps">
+      <li>Clique no botão abaixo.</li>
+      <li>Assista ao vídeo/anúncio até o final.</li>
+      <li>Volte aqui e copie o token gerado.</li>
+      <li>Cole o token na extensão, em <strong>Settings &rarr; Licença</strong>.</li>
+    </ol>
+
+    <button id="generateButton" type="button">Gerar Token Grátis</button>
+
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+
+    <div id="tokenBox" class="token-box hidden">
+      <label for="tokenOutput">Seu token</label>
+      <div class="token-row">
+        <input id="tokenOutput" type="text" readonly />
+        <button id="copyButton" type="button">Copiar</button>
+      </div>
+      <p class="hint">Este token expira em algumas horas. Volte aqui para gerar um novo quando precisar.</p>
+    </div>
+
+    <p class="footer">
+      <a href="privacy.html">Política de privacidade</a> ·
+      <a href="https://discord.gg/3shH83G64y" target="_blank" rel="noopener">Discord</a>
+    </p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
