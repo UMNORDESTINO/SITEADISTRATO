@@ -9,7 +9,9 @@
   // id in the postback (the license server expects it as "ymid" in
   // /monetag/postback?ymid=... - rename on both sides together if Monetag
   // calls it something else, e.g. "subid" or "click_id").
-  const MONETAG_ZONE_URL = "";
+  const MONETAG_ZONE_URL = "https://omg10.com/4/11892728";
+  // TODO: confirm this against Monetag's postback settings for this zone —
+  // it must match whatever macro name they use to echo the click id back.
   const MONETAG_CLICK_ID_PARAM = "ymid";
 
   const SESSION_STORAGE_KEY = "4utowolves-token-session";
