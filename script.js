@@ -1,18 +1,7 @@
 (() => {
   "use strict";
 
-  // Fill in after deploying license-server/ (see license-server/README.md).
-  const LICENSE_SERVER_URL = "";
-
-  // Fill in once the Monetag zone exists. Check Monetag's own docs for the
-  // exact macro name their Direct/Smart Link zones use to echo back a custom
-  // id in the postback (the license server expects it as "ymid" in
-  // /monetag/postback?ymid=... - rename on both sides together if Monetag
-  // calls it something else, e.g. "subid" or "click_id").
-  const MONETAG_ZONE_URL = "https://omg10.com/4/11892728";
-  // TODO: confirm this against Monetag's postback settings for this zone —
-  // it must match whatever macro name they use to echo the click id back.
-  const MONETAG_CLICK_ID_PARAM = "ymid";
+  const LICENSE_SERVER_URL = "https://4utowolves-license.4autowolves.workers.dev";
 
   const SESSION_STORAGE_KEY = "4utowolves-token-session";
   const POLL_INTERVAL_MS = 2500;
@@ -94,19 +83,10 @@
     try {
       const sessionId = await createSession();
       sessionStorage.setItem(SESSION_STORAGE_KEY, sessionId);
-
-      if (!MONETAG_ZONE_URL) {
-        // Ad network not wired in yet: fall back to just polling, so the
-        // token pipeline (create -> postback -> verify) can still be tested
-        // end to end once /monetag/postback is triggered manually or by hand.
-        setStatus("Anúncio ainda não configurado. Aguardando confirmação manual...");
-        void pollUntilReady(sessionId);
-        return;
-      }
-
-      const separator = MONETAG_ZONE_URL.includes("?") ? "&" : "?";
-      const adUrl = MONETAG_ZONE_URL + separator + MONETAG_CLICK_ID_PARAM + "=" + encodeURIComponent(sessionId);
-      window.location.href = adUrl;
+      // The Onclick/Popunder tag (loaded in <head>) fires the ad automatically
+      // on click, so we just need to keep polling for the postback.
+      setStatus("Anúncio deve abrir em instantes. Aguardando confirmação...");
+      void pollUntilReady(sessionId);
     } catch {
       setStatus("Não foi possível iniciar. Tente novamente em instantes.");
       generateButton.disabled = false;
